@@ -1,15 +1,15 @@
----
-- name: Configure interface FastEthernet6/0
+- name: Configure network devices
   hosts: all
   gather_facts: no
   connection: network_cli
   tasks:
-    - name: Configure FastEthernet6/0
+    - name: Configure interface FastEthernet6/0
       ios_config:
         lines:
           - interface FastEthernet6/0
           - ip address 192.168.4.5 255.255.255.0
           - no shutdown
+      register: result_interface_config
 
     - name: Configure SSH and username
       ios_config:
@@ -28,3 +28,13 @@
           - router ospf 2
           - network 0.0.0.0 255.255.255.255 area 2
       register: result_ospf
+
+    # Add more tasks as needed
+
+    - name: Print task results
+      debug:
+        var: item
+      with_items:
+        - result_interface_config
+        - result_SSH
+        - result_ospf
