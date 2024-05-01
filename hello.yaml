@@ -3,10 +3,36 @@
     hosts: all
     gather_facts: no
     connection: network_cli
-    tasks:
-      - name: run sh ip int br
-        ios_command:
-          commands: show ip int br
-        register: sh_ip_int_br_result
-      - name: Debug registered var
-        debug: var=sh_ip_int_br_result.stdout_lines
+    asks:
+    - name: Configure FastEthernet interfaces
+      ios_command:
+        lines:
+          - interface FastEthernet0/0
+          - ip address 20.20.1.1 255.255.255.0
+          - no shutdown
+          - interface FastEthernet1/0
+          - ip address 20.20.2.1 255.255.255.0
+          - no shutdown
+          - interface FastEthernet2/0
+          - ip address 20.20.3.1 255.255.255.0
+          - no shutdown
+          - interface FastEthernet4/0
+          - ip address 192.168.1.200 255.255.255.0
+          - no shutdown
+      register: result_fastethernet
+    - name:
+      ios_config:
+        lines:
+	  - username ahmed123 password ahmed123
+          - crypto key generate rsa encryption modulus 1024
+          - line vty 0 4
+          - transport input ssh
+          - login local
+      register: result_SSH
+
+    - name: Configure OSPF
+      ios_config:
+        lines:
+          - router ospf 1
+          - network 0.0.0.0 255.255.255.255 area 0
+      register: result_ospf
