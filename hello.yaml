@@ -1,10 +1,19 @@
 ---
-- name: Fetch running configuration from Cisco routers
-  hosts: router
-  gather_facts: no
+- name: Fetch running configuration from routers
+  hosts: r1
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      username: ahmed123
+      password: ahmed123
+      timeout: 100
+
   tasks:
     - name: Fetch running configuration
-      ios_command:
+      ios_command:  # You might consider using ios_command instead of ios_config
+        provider: "{{ cli }}"
         commands:
-          - show running-config
+          - show run
       register: config_output
