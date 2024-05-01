@@ -1,6 +1,10 @@
-- name: Hello World Sample
-  hosts: all
+---
+- name: Fetch running configuration from Cisco routers
+  hosts: routers
+  gather_facts: no
   tasks:
-    - name: Hello Message
-      debug:
-        msg: "Hello World!"
+    - name: Fetch running configuration
+      ios_command:
+        commands:
+          - show running-config
+      register: config_output
