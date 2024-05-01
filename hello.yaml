@@ -4,12 +4,13 @@
   gather_facts: no
   connection: network_cli
   tasks:
-    -- name: Merge provided configuration with device configuration
-  cisco.ios.ios_l3_interfaces:
-    config:
-      - name: FastEthernet5/0
-        ipv4:
-          - address: 10.10.1.2/24
+    - name: Ensure ipv4 address is configured on FastEthernet5/0
+    community.network.ce_ip_interface:
+      interface: FastEthernet5/0
+      version: v4
+      state: present
+      addr: 10.20.20.20
+      mask: 24
 
     - name: Configure SSH and username
       ios_config:
