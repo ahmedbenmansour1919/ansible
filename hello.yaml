@@ -1,12 +1,12 @@
 ---
-- name: Fetch running configuration from routers
-  hosts: r1
-  gather_facts: false
-  connection: local
-
-  tasks:
-    - name: Fetch running configuration
-      ios_command:
-        commands:
-          - show run
-      register: config_output
+  - name: Initial Playbook
+    hosts: all
+    gather_facts: no
+    connection: network_cli
+    tasks:
+      - name: run sh ip int br
+        ios_command:
+          commands: show ip int br
+        register: sh_ip_int_br_result
+      - name: Debug registered var
+        debug: var=sh_ip_int_br_result.stdout_lines
