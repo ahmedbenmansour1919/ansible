@@ -7,7 +7,7 @@
     - name: Configure interface FastEthernet0/0
       ios_config:
         lines:
-          - interface FastEthernet 5/0
+          - interface FastEthernet5/0
           - ip address 192.168.4.5
           - no shutdown
 
