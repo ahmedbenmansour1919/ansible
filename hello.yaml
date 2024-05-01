@@ -1,9 +1,16 @@
 ---
-  - name: Initial Playbook
-    hosts: all
-    gather_facts: no
-    connection: network_cli
-    asks:
+- name: Initial Playbook
+  hosts: all
+  gather_facts: no
+  connection: network_cli
+  vars_prompt:
+    - name: username
+      prompt: "ahmed123"
+      private: yes
+    - name: password
+      prompt: "ahmed123"
+      private: yes
+  tasks:
     - name: Configure FastEthernet interfaces
       ios_command:
         lines:
@@ -20,11 +27,12 @@
           - ip address 192.168.1.200 255.255.255.0
           - no shutdown
       register: result_fastethernet
+
     - name: Configure SSH and username
       ios_command:
         lines:
           - conf t
-          - username ahmed123 secret ahmed123
+          - username {{ username }} secret {{ password }}
           - crypto key generate rsa encryption modulus 1024
           - line vty 0 4
           - transport input ssh
