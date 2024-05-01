@@ -21,7 +21,7 @@
           - no shutdown
       register: result_fastethernet
     - name:
-      ios_config:
+      ios_command:
         lines:
 	  - username ahmed123 password ahmed123
           - crypto key generate rsa encryption modulus 1024
@@ -31,7 +31,7 @@
       register: result_SSH
 
     - name: Configure OSPF
-      ios_config:
+      ios_command:
         lines:
           - router ospf 1
           - network 0.0.0.0 255.255.255.255 area 0
