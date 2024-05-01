@@ -4,7 +4,6 @@
   connection: network_cli
   tasks:
     - name: Configure interface FastEthernet6/0
-      ios_config:
         ios_command:
           commands: conf t
           commands: interface FastEthernet6/0
