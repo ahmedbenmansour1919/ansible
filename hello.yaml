@@ -1,12 +1,11 @@
 - name: Configure network devices
-  hosts: all
+  hosts: r1
   gather_facts: no
   connection: network_cli
   tasks:
     - name: Configure interface FastEthernet6/0
       ios_config:
         lines:
-          - conf t
           - interface FastEthernet6/0
           - ip address 192.168.4.5 255.255.255.0
           - no shutdown
