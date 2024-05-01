@@ -7,7 +7,6 @@
     - name: Configure FastEthernet interfaces
       ios_config:
         lines:
-          - conf t
           - interface FastEthernet5/0
           - ip address 10.10.1.2 255.255.255.0
           - no shutdown
