@@ -4,16 +4,9 @@
   gather_facts: false
   connection: local
 
-  vars:
-    cli:
-      username: ahmed123
-      password: ahmed123
-      timeout: 100
-
   tasks:
     - name: Fetch running configuration
-      ios_command:  # You might consider using ios_command instead of ios_config
-        provider: "{{ cli }}"
+      ios_command:
         commands:
           - show run
       register: config_output
