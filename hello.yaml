@@ -4,10 +4,10 @@
   gather_facts: no
   connection: network_cli
   tasks:
-    - name: Configure interface FastEthernet0/0
+    - name: Configure interface FastEthernet
       ios_config:
         lines:
-          - interface Ethernet5/0
+          - interface FastEthernet6/0
           - ip address 192.168.4.5
           - no shutdown
 
