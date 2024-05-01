@@ -20,7 +20,7 @@
           - ip address 192.168.1.200 255.255.255.0
           - no shutdown
       register: result_fastethernet
-    - name:
+    - name: Configure SSH and username
       ios_command:
         lines:
 	  - conf t
