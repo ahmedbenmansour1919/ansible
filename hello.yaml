@@ -11,19 +11,19 @@
           - interface FastEthernet6/0
           - ip address 192.168.4.5 255.255.255.0
       register: result_interface_config
-    - name: Configure SSH and username
+    # - name: Configure SSH and username
+    #   ios_command:
+    #     commands:
+    #       - username ahmed12 secret ahmed12
+    #       - crypto key generate rsa encryption modulus 1024
+    #       - line vty 0 4
+    #       - transport input ssh
+    #       - login local
+    #   register: result_SSH
+    - name: Configure OSPF
       ios_command:
         commands:
-          - username ahmed12 secret ahmed12
-          - crypto key generate rsa encryption modulus 1024
-          - line vty 0 4
-          - transport input ssh
-          - login local
-      register: result_SSH
-
-    - name: Configure OSPF
-      ios_config:
-        lines:
+          - conf t
           - router ospf 2
           - network 0.0.0.0 255.255.255.255 area 2
       register: result_ospf
