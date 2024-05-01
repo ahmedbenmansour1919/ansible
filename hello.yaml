@@ -1,10 +1,10 @@
 ---
-- name: Initial Playbook
+- name: Configure interface FastEthernet6/0
   hosts: all
   gather_facts: no
   connection: network_cli
   tasks:
-    - name: Configure interface FastEthernet
+    - name: Configure FastEthernet6/0
       ios_config:
         lines:
           - interface FastEthernet6/0
