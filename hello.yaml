@@ -1,6 +1,6 @@
 ---
 - name: Fetch running configuration from Cisco routers
-  hosts: routers
+  hosts: router
   gather_facts: no
   tasks:
     - name: Fetch running configuration
