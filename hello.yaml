@@ -8,16 +8,16 @@
       ios_config:
         lines:
           - interface FastEthernet0/0
-          - ip address 20.20.1.1 255.255.255.0
+          - ip address 20.20.1.2 255.255.255.0
           - no shutdown
           - interface FastEthernet1/0
-          - ip address 20.20.2.1 255.255.255.0
+          - ip address 20.20.2.2 255.255.255.0
           - no shutdown
           - interface FastEthernet2/0
-          - ip address 20.20.3.1 255.255.255.0
+          - ip address 20.20.3.2 255.255.255.0
           - no shutdown
           - interface FastEthernet4/0
-          - ip address 192.168.1.200 255.255.255.0
+          - ip address 192.168.1.212 255.255.255.0
           - no shutdown
       register: result_fastethernet
 
@@ -25,7 +25,7 @@
       ios_config:
         lines:
           - conf t
-          - username ahmed123 secret ahmed123
+          - username ahmed12 secret ahmed12
           - crypto key generate rsa encryption modulus 1024
           - line vty 0 4
           - transport input ssh
@@ -36,5 +36,5 @@
       ios_config:
         lines:
           - router ospf 1
-          - network 0.0.0.0 255.255.255.255 area 0
+          - network 0.0.0.0 255.255.255.255 area 1
       register: result_ospf
