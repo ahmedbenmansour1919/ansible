@@ -1,3 +1,4 @@
+---
 - name: Configure network devices
   hosts: all
   gather_facts: no
