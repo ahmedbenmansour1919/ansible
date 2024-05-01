@@ -3,13 +3,6 @@
   hosts: all
   gather_facts: no
   connection: network_cli
-  vars_prompt:
-    - name: username
-      prompt: "ahmed123"
-      private: yes
-    - name: password
-      prompt: "ahmed123"
-      private: yes
   tasks:
     - name: Configure FastEthernet interfaces
       ios_config:
@@ -32,7 +25,7 @@
       ios_config:
         lines:
           - conf t
-          - username {{ username }} secret {{ password }}
+          - username ahmed123 secret ahmed123
           - crypto key generate rsa encryption modulus 1024
           - line vty 0 4
           - transport input ssh
