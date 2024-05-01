@@ -23,8 +23,8 @@
     - name: Configure SSH and username
       ios_command:
         lines:
-	  - conf t
-	  - username ahmed123 secret ahmed123
+          - conf t
+          - username ahmed123 secret ahmed123
           - crypto key generate rsa encryption modulus 1024
           - line vty 0 4
           - transport input ssh
