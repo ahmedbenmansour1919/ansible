@@ -35,4 +35,4 @@
       register: create_vlans
 
     - name: Debug registered var
-      debug: var=create_vlans.stdout_lines
+      debug: var=sh_vlan_br_result.stdout_lines
