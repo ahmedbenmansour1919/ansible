@@ -8,7 +8,7 @@
       ios_command:
         commands:
           - enable
-          - conf t
+          - configure terminal
           - vlan 10
           - name bleu
           - vlan 20
