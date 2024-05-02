@@ -31,6 +31,6 @@
           - interface Ethernet1/0
           - switchport access vlan 20
           - switchport mode access
-        register: create vlans
+      register: create_vlans
     - name: Debug registered var
-      debug: var=sh_vlan_br_result.stdout_lines
+      debug: var=create_vlans.stdout_lines
