@@ -32,5 +32,5 @@
           - switchport access vlan 20
           - switchport mode access
         register: create vlans
-      - name: Debug registered var
-        debug: var=sh_vlan_br_result.stdout_lines
+    - name: Debug registered var
+      debug: var=sh_vlan_br_result.stdout_lines
