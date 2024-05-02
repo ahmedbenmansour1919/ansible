@@ -8,8 +8,19 @@
       ios_command:
         commands:
           - conf t
-          - interface FastEthernet6/0
-          - ip address 192.168.4.5 255.255.255.0
+          - interface FastEthernet0/0
+          - ip address 20.20.1.1 255.255.255.0
+          - no shutdown
+          - interface FastEthernet1/0
+          - ip address 20.20.2.1 255.255.255.0
+          - no shutdown
+          - interface FastEthernet2/0
+          - ip address 20.20.3.1 255.255.255.0
+          - no shutdown
+          - interface FastEthernet4/0
+          - ip address 192.168.1.200 255.255.255.0
+          - no shutdown
+      register: result_fastethernet
       register: result_interface_config
     # - name: Configure SSH and username
     #   ios_command:
@@ -24,8 +35,8 @@
       ios_command:
         commands:
           - conf t
-          - router ospf 2
-          - network 0.0.0.0 255.255.255.255 area 2
+          - router ospf 1
+          - network 0.0.0.0 255.255.255.255 area 0
       register: result_ospf
 
     # Add more tasks as needed
