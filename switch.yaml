@@ -5,6 +5,13 @@
     connection: network_cli
     tasks:
       - name: Create VLANs
+      ios_command:
+          - conf t
+          - vlan 10
+          - name bleu
+          - vlan 20
+          - name green
+      - name: Assign VLANs to interfaces
         ios_command:
           - conf t
           - interface Ethernet0/0
