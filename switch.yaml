@@ -4,7 +4,7 @@
     gather_facts: no
     connection: network_cli
     tasks:
-      - name: configure vlan
+      - name: Create VLANs
         ios_command:
           - conf t
           - interface Ethernet0/0
