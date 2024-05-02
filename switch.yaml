@@ -12,9 +12,9 @@
           - name bleu
           - vlan 20
           - name green
-      - name: Assign VLANs to interfaces
-        ios_command:
-          commands:
+    - name: Assign VLANs to interfaces
+      ios_command:
+        commands:
           - conf t
           - interface Ethernet0/0
           - switchport trunk encapsulation dot1q
