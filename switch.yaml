@@ -7,11 +7,11 @@
     - name: Create VLANs
       ios_command:
         commands:
-          - configure terminal
           - vlan 10
           - name bleu
           - vlan 20
           - name green
+
     - name: Assign VLANs to interfaces
       ios_command:
         commands:
@@ -32,5 +32,6 @@
           - switchport access vlan 20
           - switchport mode access
       register: create_vlans
+
     - name: Debug registered var
       debug: var=create_vlans.stdout_lines
