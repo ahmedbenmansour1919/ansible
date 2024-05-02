@@ -4,7 +4,7 @@
   gather_facts: no
   connection: network_cli
   tasks:
-    - name: Configure interface FastEthernet6/0
+    - name: Configure interface FastEthernet
       ios_command:
         commands:
           - conf t
