@@ -7,6 +7,7 @@
     - name: Create VLANs
       ios_command:
         commands:
+          - enable
           - conf t
           - vlan 10
           - name bleu
