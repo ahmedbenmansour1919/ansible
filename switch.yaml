@@ -5,7 +5,7 @@
     connection: network_cli
     tasks:
       - name: Create VLANs
-      ios_command:
+        ios_command:
           - conf t
           - vlan 10
           - name bleu
