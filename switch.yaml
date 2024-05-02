@@ -4,9 +4,24 @@
     gather_facts: no
     connection: network_cli
     tasks:
-      - name: run sh ip int br
+      - name: configure vlan
         ios_command:
-          commands: show vlan br
-        register: sh_ip_int_br_result
+          - conf t
+          - interface Ethernet0/0
+          - switchport trunk encapsulation dot1q
+          - switchport mode trunk
+          - interface Ethernet0/1
+          - switchport access vlan 10
+          - switchport mode access
+          - interface Ethernet0/2
+          - switchport access vlan 10
+          - switchport mode access
+          - interface Ethernet0/3
+          - switchport access vlan 20
+          - switchport mode access
+          - interface Ethernet1/0
+          - switchport access vlan 20
+          - switchport mode access
+        register: create vlans
       - name: Debug registered var
-        debug: var=sh_ip_int_br_result.stdout_lines
+        debug: var=sh_vlan_br_result.stdout_lines
