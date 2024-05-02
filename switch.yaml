@@ -1,11 +1,12 @@
 ---
-  - name: Initial Playbook
-    hosts: all
-    gather_facts: no
-    connection: network_cli
-    tasks:
-      - name: Create VLANs
-        ios_command:
+- name: Configure network devices
+  hosts: all
+  gather_facts: no
+  connection: network_cli
+  tasks:
+    - name: Create VLANs
+      ios_command:
+        commands:
           - conf t
           - vlan 10
           - name bleu
@@ -13,6 +14,7 @@
           - name green
       - name: Assign VLANs to interfaces
         ios_command:
+          commands:
           - conf t
           - interface Ethernet0/0
           - switchport trunk encapsulation dot1q
