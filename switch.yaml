@@ -1,5 +1,5 @@
 ---
-- name: Configure network devices
+- name: Configure VLANs on Switch
   hosts: all
   gather_facts: no
   connection: network_cli
@@ -7,7 +7,6 @@
     - name: Create VLANs
       ios_command:
         commands:
-          - enable
           - configure terminal
           - vlan 10
           - name bleu
