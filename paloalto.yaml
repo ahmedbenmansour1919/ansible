@@ -7,13 +7,14 @@
     device:
       hostname: "192.168.1.132"
       username: "admin"
-      password: "Ahmed123"  # Added a closing quotation mark here
+      password: "Ahmed123"
+
   collections:
     - paloaltonetworks.panos
 
   tasks:
     - name: Create first security rule
-      paloaltonetworks.panos.panos_security_rule:
+      panos_security_rule:  # Updated module name
         provider: '{{ device }}'
         rule_name: 'Prod SSH Inbound'
         source_zone: ['untrust']
