@@ -4,7 +4,7 @@
   gather_facts: false
 
   vars:
-    panos_provider:
+    device:
       hostname: "192.168.1.132"
       username: "admin"
       password: "Ahmed123"  # Added a closing quotation mark here
