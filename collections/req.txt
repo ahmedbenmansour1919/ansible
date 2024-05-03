@@ -1,4 +1,4 @@
 ---
 collections:
   - paloaltonetworks.panos
-  - name: cisco.ios
+  - cisco.ios
