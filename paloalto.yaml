@@ -14,7 +14,7 @@
 
   tasks:
     - name: Create first security rule
-      panos_security_rule:  # Updated module name
+      paloaltonetworks.panos.panos_security_rule:  # Updated module name
         provider: '{{ device }}'
         rule_name: 'Prod SSH Inbound'
         source_zone: ['untrust']
