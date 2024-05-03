@@ -1,5 +1,0 @@
----
-- name: Install pan-python library
-      pip:
-        name: pan-python
-        state: present
