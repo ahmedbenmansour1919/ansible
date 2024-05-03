@@ -1,6 +1,4 @@
 ---
-
 collections:
-- name: ansible.network
-- name: cisco.ios
-- name: paloaltonetworks.panos
+  - paloaltonetworks.panos
+  - name: cisco.ios
