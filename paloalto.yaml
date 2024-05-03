@@ -12,10 +12,16 @@
     - paloaltonetworks.panos
 
   tasks:
-    - name: Configure general settings
-      paloaltonetworks.panos.panos_general_settings:
-        provider: "{{ panos_provider }}"
-        hostname: "paloalto-1"
-        domain: "ahmed.com"
-        lifecycle:
-          create_before_destroy: true
+    - name: Create first security rule
+      paloaltonetworks.panos.panos_security_rule:
+        provider: '{{ device }}'
+        rule_name: 'Prod SSH Inbound'
+        source_zone: ['untrust']
+        destination_zone: ['trust']
+        source_ip: ['any']
+        destination_ip: ['Prod-Instances']
+        application: ['ssh']
+        service: ['application-default']
+        action: 'allow'
+        tag_name: ['Prod']
+        commit: false
