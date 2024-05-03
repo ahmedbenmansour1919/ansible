@@ -13,13 +13,4 @@
     - name: Add Security Rule
       panos_security_rule:
         provider: "{{ device }}"
-        rule_name: "Allow SSH from Internal to DMZ"
-        source_zone: "internal"
-        source_ip: "192.168.1.0/24"
-        destination_zone: "dmz"
-        destination_ip: "10.10.10.0/24"
-        destination_port: "22"
-        action: "allow"
-        log_setting: "log-and-forward"
-        description: "Allow SSH traffic from internal to DMZ"
-        state: "present"
+        cmd: 'show interface managment'
