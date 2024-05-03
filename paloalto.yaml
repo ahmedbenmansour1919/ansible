@@ -11,6 +11,6 @@
 
   tasks:
     - name: Add Security Rule
-      panos_security_rule:
+      paloaltonetworks.panos.panos_op:
         provider: "{{ device }}"
         cmd: 'show interface managment'
