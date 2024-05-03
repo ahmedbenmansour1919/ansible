@@ -9,7 +9,7 @@
       username: "admin"
       password: "Ahmed123"
 
-   tasks:
+  tasks:
     - name: Add example rule 1
       paloaltonetworks.panos.panos_security_rule:
         provider: "{{ device }}"
@@ -20,4 +20,4 @@
         destination_ip: ["destination-server"]
         application: ["ssh"]
         service: ["tcp-12345"]
-        action: "allow"
+        action: "allow" 
