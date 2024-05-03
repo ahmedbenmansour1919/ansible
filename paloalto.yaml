@@ -11,11 +11,6 @@
       password: "Ahmed123"
 
   tasks:
-    - name: Install pan-python library
-      pip:
-        name: pan-python
-        state: present
-
     - name: Add example rule 1
       paloaltonetworks.panos.panos_security_rule:
         provider: "{{ device }}"
