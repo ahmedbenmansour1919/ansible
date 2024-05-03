@@ -13,7 +13,7 @@
 
   tasks:
     - name: Configure general settings
-      panos_general_settings:
+      paloaltonetworks.panos.panos_general_settings:
         provider: "{{ panos_provider }}"
         hostname: "paloalto-1"
         domain: "ahmed.com"
