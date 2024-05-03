@@ -2,3 +2,4 @@
 collections:
   - paloaltonetworks.panos
   - cisco.ios
+  - pan-python
