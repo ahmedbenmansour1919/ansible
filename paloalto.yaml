@@ -10,10 +10,6 @@
       password: "Ahmed123"  # Added a closing quotation mark here
 
   tasks:
-    - name: Ensure Palo Alto Networks provider is configured
-      panos_provider:
-        provider: "{{ panos_provider }}"
-      
     - name: Configure general settings
       panos_general_settings:
         provider: "{{ panos_provider }}"
