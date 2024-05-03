@@ -5,6 +5,6 @@
   connection: network_cli
   tasks:
     - name: Run 'show interface management' command on PaloAlto firewall
-      panos_cli:
-        cmd: show interface management
+      panos_command:
+        commands: show interface management
       register: management_interface_output
