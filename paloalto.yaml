@@ -4,7 +4,7 @@
   gather_facts: no
   connection: network_cli
   tasks:
-    - name: run sh ip int br
+    - name: Run 'show interface management' command on PaloAlto firewall
       panos_cli:
         cmd: show interface management
       register: management_interface_output
