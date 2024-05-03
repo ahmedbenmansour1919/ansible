@@ -1,10 +1,23 @@
 ---
-- name: Configure network devices
-  hosts: all
-  gather_facts: no
-  connection: network_cli
+- name: Provision Palo Alto Networks firewall and associated resources
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    panos_provider:
+      hostname: "192.168.1.130"
+      username: "admin"
+      password: "Ahmed123"  # Added a closing quotation mark here
+
   tasks:
-    - name: Run 'show interface management' command on PaloAlto firewall
-      community.paloaltonetworks.panos.panos_command:
-        cmd: show interface management
-      register: management_interface_output
+    - name: Ensure Palo Alto Networks provider is configured
+      panos_provider:
+        provider: "{{ panos_provider }}"
+      
+    - name: Configure general settings
+      panos_general_settings:
+        provider: "{{ panos_provider }}"
+        hostname: "paloalto-1"
+        domain: "ahmed.com"
+        lifecycle:
+          create_before_destroy: true
