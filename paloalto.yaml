@@ -2,6 +2,7 @@
 - name: Create security policies
   hosts: all
   gather_facts: false
+  connection: local
 
   vars:
     device:
