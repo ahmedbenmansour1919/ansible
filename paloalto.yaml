@@ -14,6 +14,7 @@
     - name: show list of all interfaces
   paloaltonetworks.panos.panos_op:
      provider: '{{ palo_provider }}'
+     cmd: "pip install pan-python"
      cmd: "show interface logical"
   register: show_interface_logical
     # - name: Add example rule 1
