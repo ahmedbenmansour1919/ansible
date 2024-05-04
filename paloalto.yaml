@@ -14,7 +14,7 @@
     - name: show list of all interfaces
       paloaltonetworks.panos.panos_op:
         provider: '{{ palo_provider }}'
-          cmd: "show interface logical"
+        cmd: "show interface logical"
       register: show_interface_logical
     # - name: Add example rule 1
     #   paloaltonetworks.panos.panos_security_rule:
