@@ -28,7 +28,7 @@
         provider: '{{ device }}'
         if_name: 'ethernet1/3'
         mode: 'layer3'
-        zone_name: 'trust2'
+        zone: 'trust2'
         ip: ['10.1.1.1/24']
         enable_dhcp: false
       register: result
@@ -39,15 +39,7 @@
         zone: 'trust2'
         mode: 'layer3'
         
-    - name: add interfaces to zone trust2
-      paloaltonetworks.panos.panos_interface:
-        provider: '{{ device }}' 
-        zone: 'trust2'
-        mode: 'layer3'
-        if_name: 
-          - 'ethernet1/1'
-          - 'ethernet1/2'
-          - 'ethernet1/3'  # Add additional interface names here
+
 
         
     - name: create DMZ zone on a firewall
