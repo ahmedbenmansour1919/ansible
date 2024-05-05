@@ -23,15 +23,15 @@
         service: ['application-default']
         action: 'allow'
 
-     - name: Create ethernet interfaces
-       paloaltonetworks.panos.panos_interface:
-         provider: '{{ provider }}'
-         if_name: "{{ item.name }}"
-         ip: "{{ item.ip }}"
-       with_items:
-         - { name: "ethernet1/5", ip: "10.10.10.10" }
-         - { name: "ethernet1/6", ip: "10.10.30.30" }
-
+    - name: test_panos_interface - Modify
+      paloaltonetworks.panos.panos_interface:
+        provider: '{{ device }}'
+        if_name: 'ethernet1/3'
+        mode: 'layer3'
+        zone_name: 'trust2'
+        ip: ['10.1.1.1/24']
+        enable_dhcp: false
+      register: result
     # - name: enable DHCP client on ethernet1/1.5 in zone public
     #   paloaltonetworks.panos.panos_l3_subinterface:
     #     provider: '{{ device }}'
