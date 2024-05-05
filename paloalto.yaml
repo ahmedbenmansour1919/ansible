@@ -23,13 +23,13 @@
         service: ['application-default']
         action: 'allow'
 
-    - name: ethernet1/2.7 as static in zone dmz
+    - name: ethernet1/1.50 as static in zone trust2
       paloaltonetworks.panos.panos_l3_subinterface:
-      provider: '{{ device }}'
-      name: "ethernet1/50"
-      tag: 50
-      ip: ["10.1.1.1/24"]
-      zone_name: "trust2"
+        provider: '{{ device }}'
+        name: "ethernet1/1.50"
+        tag: 50
+        ip: ["10.1.1.1/24"]
+        zone_name: "trust2"
     - name: create DMZ zone on a firewall
       paloaltonetworks.panos.panos_zone:
         provider: '{{ device }}'
