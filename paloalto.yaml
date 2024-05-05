@@ -14,11 +14,13 @@
     - name: Add example rule 1
       paloaltonetworks.panos.panos_security_rule:
         provider: "{{ device }}"
-        rule_name: "example rule 1"
-        source_zone: ["any"]
-        source_ip: ["source-server"]
-        destination_zone: ["any"]
-        destination_ip: ["destination-server"]
-        application: ["ssh"]
-        service: ["tcp-12345"]
-        action: "allow" 
+        source_zones: ["any"]
+        source_addresses: ["any"]
+        source_users: ["any"]
+        destination_zones: ["any"]
+        destination_addresses: ["any"]
+        applications: ["any"]
+        services: ["application-default"]
+        categories: ["any"]
+        action: "allow"
+ 
