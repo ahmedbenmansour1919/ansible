@@ -22,18 +22,26 @@
         application: ['any']
         service: ['application-default']
         action: 'allow'
+
+    - name: ethernet1/2.7 as static in zone dmz
+      paloaltonetworks.panos.panos_l3_subinterface:
+      provider: '{{ device }}'
+      name: "ethernet1/50"
+      tag: 50
+      ip: ["10.1.1.1/24"]
+      zone_name: "trust2"
     - name: create DMZ zone on a firewall
       paloaltonetworks.panos.panos_zone:
         provider: '{{ device }}'
         zone: 'trust2'
         mode: 'layer3'
         
-    - name: add interfaces to zone trust2
-      paloaltonetworks.panos.panos_interface:
-        provider: '{{ device }}'
-        zone: 'trust2'
-        mode: 'layer3'
-        interface: ['ethernet1/1', 'ethernet1/1.30', 'ethernet1/1.40']
+    # - name: add interfaces to zone trust2
+    #   paloaltonetworks.panos.panos_interface:
+    #     provider: '{{ device }}'
+    #     zone: 'trust2'
+    #     mode: 'layer3'
+    #     interface: ['ethernet1/1', 'ethernet1/1.30', 'ethernet1/1.40']
         
     - name: create DMZ zone on a firewall
       paloaltonetworks.panos.panos_zone:
@@ -41,11 +49,11 @@
         zone: 'untrust2'
         mode: 'layer3'
         
-    - name: add ethernet1/2 to zone untrust2
-      paloaltonetworks.panos.panos_interface:
-        provider: '{{ device }}'
-        zone: 'untrust2'
-        mode: 'layer3'
-        interface: ['ethernet1/2']
+    # - name: add ethernet1/2 to zone untrust2
+    #   paloaltonetworks.panos.panos_interface:
+    #     provider: '{{ device }}'
+    #     zone: 'untrust2'
+    #     mode: 'layer3'
+    #     interface: ['ethernet1/2']
 
  
