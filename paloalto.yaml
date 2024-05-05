@@ -11,17 +11,15 @@
       password: "Ahmed123"
 
   tasks:
-    - name: Add example rule 1
+    - name: Create second security rule
       paloaltonetworks.panos.panos_security_rule:
         provider: "{{ device }}"
         rule_name: 'permit'
-        source_zones: ["any"]
-        source_addresses: ["any"]
-        source_users: ["any"]
-        destination_zones: ["any"]
-        destination_addresses: ["any"]
-        applications: ["any"]
-        services: ["application-default"]
-        categories: ["any"]
-        action: "allow"
+        source_zone: ['any']
+        destination_zone: ['any']
+        source_ip: ['any']
+        destination_ip: ['any']
+        application: ['any']
+        service: ['application-default']
+        action: 'allow'
  
