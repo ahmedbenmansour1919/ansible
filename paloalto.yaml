@@ -44,7 +44,7 @@
         provider: '{{ device }}' 
         zone: 'trust2'
         mode: 'layer3'
-        interfaces: ['ethernet1/1', 'ethernet1/1.30', 'ethernet1/1.40']
+        interface: ['ethernet1/1']
         
     - name: create DMZ zone on a firewall
       paloaltonetworks.panos.panos_zone:
