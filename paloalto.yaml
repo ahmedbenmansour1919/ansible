@@ -23,6 +23,12 @@
         service: ['application-default']
         action: 'allow'
 
+    - name: create DMZ zone on a firewall
+      paloaltonetworks.panos.panos_zone:
+        provider: '{{ device }}'
+        zone: 'trust2'
+        mode: 'layer3'
+        
     - name: Create ethernet interfaces
       paloaltonetworks.panos.panos_interface:
         provider: '{{ device }}'
@@ -34,15 +40,6 @@
         enable_dhcp: false
       register: result
 
-    - name: create DMZ zone on a firewall
-      paloaltonetworks.panos.panos_zone:
-        provider: '{{ device }}'
-        zone: 'trust2'
-        mode: 'layer3'
-        
-
-
-        
     - name: create DMZ zone on a firewall
       paloaltonetworks.panos.panos_zone:
         provider: '{{ device }}'
