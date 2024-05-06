@@ -23,6 +23,11 @@
         service: ['application-default']
         action: 'allow'
         
+    - name: Create Virtual Router
+      paloaltonetworks.panos.panos_virtual_router:
+        provider: '{{ device }}'
+        name: vr-1
+        
     - name: ensure mngt profile trust exists 
       paloaltonetworks.panos.panos_management_profile:
         provider: '{{ device }}'
@@ -89,6 +94,30 @@
         provider: '{{ device }}'
         name: 'untrust'
         ping: true
+
+
+    - name: ethernet1/3.50 as static in zone dmz
+      paloaltonetworks.panos.panos_l3_subinterface:
+        provider: '{{ device }}'
+        name: "ethernet1/3.50"
+        tag: 50
+        enable_dhcp: false
+        ip: ["10.1.1.1/24"]
+        zone_name: "untrust"
+        vr_name: 'default'
+        management_profile: 'untrust'
+
+    - name: Create route 'Test-One'
+      paloaltonetworks.panos.panos_static_route:
+        provider: '{{ provider }}'
+        name: 'Test-One'
+        destination: '1.1.1.0/24'
+        nexthop: '10.0.0.1'
+
+    
+   
+
+
 
 
     
