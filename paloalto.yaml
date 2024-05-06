@@ -32,10 +32,9 @@
     - name: Create ethernet interfaces
       paloaltonetworks.panos.panos_interface:
         provider: '{{ device }}'
-        interface: ['ethernet1/3']
         if_name: 'ethernet1/3'
         mode: 'layer3'
-        zone: 'trust2'
+        zone_name: 'trust2'
         ip: ['10.1.1.1/24']
         enable_dhcp: false
       register: result
