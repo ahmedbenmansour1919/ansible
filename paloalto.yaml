@@ -126,6 +126,16 @@
         metric: "10"
         virtual_router: "vr-1"
 
+    - name: Add IKE crypto config to the firewall
+      paloaltonetworks.panos.panos_ike_crypto_profile:
+        provider: '{{ device }}'
+        state: 'present'
+        name: 'vpn-0cc61dd8c06f95cfd-0'
+        dh_group: ['group2']
+        authentication: ['sha1']
+        encryption: ['aes-128-cbc']
+        lifetime_seconds: '28800'    
+
     - name: Add IKE gateway config to the firewall
       paloaltonetworks.panos.panos_ike_gateway:
         provider: '{{ device }}'
@@ -145,7 +155,17 @@
         enable_liveness_check: false
         liveness_check_interval: '5'
         ikev1_exchange_mode: 'auto'
-        ikev1_crypto_profile: 'suite-b-gcm-300'
+        ikev1_crypto_profile: 'vpn-0cc61dd8c06f95cfd-0'
+
+
+    - name: Add IPSec crypto config to the firewall
+      paloaltonetworks.panos_ipsec_profile:
+        provider: '{{ device }}'
+        state: 'present'
+        name: 'ipsec-vpn-0cc61dd8c06f95cfd-0'
+        esp_authentication: ['sha1']
+        esp_encryption: ['aes-128-cbc']
+        lifetime_seconds: '3600'
 
     - name: Add IPSec tunnel to IKE gateway profile
       paloaltonetworks.panos.panos_ipsec_tunnel:
@@ -153,7 +173,7 @@
         name: 'IPSecTunnel-Ansible'
         tunnel_interface: 'tunnel.101'
         ak_ike_gateway: 'IKEGW-Ansible'
-        ak_ipsec_crypto_profile: 'suite-b-gcm-256'
+        ak_ipsec_crypto_profile: 'psec-vpn-0cc61dd8c06f95cfd-0'
         state: 'present'
     
 
