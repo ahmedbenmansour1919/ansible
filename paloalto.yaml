@@ -179,25 +179,7 @@
     - name: Configure DHCP Server
       paloaltonetworks.panos.panos_dhcp_server:
         provider: "{{ device }}"
-        zone: "trust"  # Define the zone for DHCP server
-        name: "dhcp_server"  # Name of the DHCP server
-        state: "present"
-        pool:
-          name: "dhcp_pool"
-          range:
-            - "192.168.1.10"
-            - "192.168.1.50"
-          gateway: "192.168.1.1"
-          subnet_mask: "255.255.255.0"
-          dns_server_primary: "8.8.8.8"
-          dns_server_secondary: "8.8.4.4"
-          lease_time: "3600"  # Lease time in seconds
-          domain_suffix: "example.com"    
-
-     - paloaltonetworks.panos.panos_dhcp:
-       provider: '{{ device }}'
-       interface: 'ethernet1/2'
-       state: 'gathered'   
+        name: "dhcp_server"    
     
 
     
