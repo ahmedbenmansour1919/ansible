@@ -26,7 +26,7 @@
     - name: Create Virtual Router
       paloaltonetworks.panos.panos_virtual_router:
         provider: '{{ device }}'
-        name: vr-1
+        name: 'vr-1'
         
     - name: ensure mngt profile trust exists 
       paloaltonetworks.panos.panos_management_profile:
