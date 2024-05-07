@@ -126,35 +126,35 @@
         metric: "10"
         virtual_router: "vr-1"
 
-    # - name: Add IKE gateway config to the firewall
-    #   paloaltonetworks.panos.panos_ike_gateway:
-    #     provider: '{{ device }}'
-    #     state: 'present'
-    #     name: 'IKEGW-Ansible'
-    #     version: 'ikev1'
-    #     interface: 'ethernet1/2'
-    #     local_ip_address_type: 'ip'
-    #     local_ip_address: '20.20.3.2/24'
-    #     peer_ip_value: '20.20.2.2'
-    #     pre_shared_key: 'ahmed123'
-    #     peer_id_type: 'ipaddr'
-    #     peer_id_value: '20.20.2.2'
-    #     local_id_type: 'ipaddr'
-    #     local_id_value: '20.20.3.2'
-    #     enable_passive_mode: false
-    #     enable_liveness_check: false
-    #     liveness_check_interval: '5'
-    #     ikev1_exchange_mode: 'auto'
-    #     ikev1_crypto_profile: 'suite-b-gcm-256'
+    - name: Add IKE gateway config to the firewall
+      paloaltonetworks.panos.panos_ike_gateway:
+        provider: '{{ device }}'
+        state: 'present'
+        name: 'IKEGW-Ansible'
+        version: 'ikev1'
+        interface: 'ethernet1/2'
+        local_ip_address_type: 'ip'
+        local_ip_address: '20.20.3.2/24'
+        peer_ip_value: '20.20.2.2'
+        pre_shared_key: 'ahmed123'
+        peer_id_type: 'ipaddr'
+        peer_id_value: '20.20.2.2'
+        local_id_type: 'ipaddr'
+        local_id_value: '20.20.3.2'
+        enable_passive_mode: false
+        enable_liveness_check: false
+        liveness_check_interval: '5'
+        ikev1_exchange_mode: 'auto'
+        ikev1_crypto_profile: 'suite-b-gcm-256'
 
-    # - name: Add IPSec tunnel to IKE gateway profile
-    #   paloaltonetworks.panos.panos_ipsec_tunnel:
-    #     provider: '{{ device }}'
-    #     name: 'IPSecTunnel-Ansible'
-    #     tunnel_interface: 'tunnel.101'
-    #     ak_ike_gateway: 'IKEGW-Ansible'
-    #     ak_ipsec_crypto_profile: 'suite-b-gcm-256'
-    #     state: 'present'
+    - name: Add IPSec tunnel to IKE gateway profile
+      paloaltonetworks.panos.panos_ipsec_tunnel:
+        provider: '{{ device }}'
+        name: 'IPSecTunnel-Ansible'
+        tunnel_interface: 'tunnel.101'
+        ak_ike_gateway: 'IKEGW-Ansible'
+        ak_ipsec_crypto_profile: 'suite-b-gcm-256'
+        state: 'present'
     
 
     
