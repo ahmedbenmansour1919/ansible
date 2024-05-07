@@ -78,7 +78,7 @@
         provider: '{{ device }}'
         if_name: "tunnel.101"
         zone_name: 'VPN'
-        vr_name: 'default'
+        vr_name: 'vr-1'
         management_profile: 'untrust'
 
     - name: ensure mngt profile trust exists 
