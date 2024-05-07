@@ -173,7 +173,7 @@
         name: 'IPSecTunnel-Ansible'
         tunnel_interface: 'tunnel.101'
         ak_ike_gateway: 'IKEGW-Ansible'
-        ak_ipsec_crypto_profile: 'psec-vpn-0cc61dd8c06f95cfd-0'
+        ak_ipsec_crypto_profile: 'ipsec-vpn-0cc61dd8c06f95cfd-0'
         state: 'present'
     
 
