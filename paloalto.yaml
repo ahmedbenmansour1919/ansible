@@ -112,7 +112,6 @@
         provider: '{{ device }}'
         name: 'Test-One'
         destination: '1.1.1.0/24'
-        interface: 'none'
         nexthop: '10.0.0.1'
         metric: "10"
         virtual_router: "vr-1"
