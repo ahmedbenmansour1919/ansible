@@ -145,7 +145,7 @@
         enable_liveness_check: false
         liveness_check_interval: '5'
         ikev1_exchange_mode: 'auto'
-        ikev1_crypto_profile: 'suite-b-gcm-256'
+        ikev1_crypto_profile: 'suite-b-gcm-300'
 
     - name: Add IPSec tunnel to IKE gateway profile
       paloaltonetworks.panos.panos_ipsec_tunnel:
