@@ -1,0 +1,211 @@
+---
+- name: Create security policies
+  hosts: all
+  gather_facts: false
+  connection: local
+
+  vars:
+    device:
+      ip_address: "192.168.1.130"
+      username: "admin"
+      password: "Ahmed123"
+
+  tasks:
+    - name: Create first security rule
+      paloaltonetworks.panos.panos_security_rule:
+        provider: "{{ device }}"
+        rule_name: 'permit'
+        source_zone: ['any']
+        destination_zone: ['any']
+        source_ip: ['any']
+        destination_ip: ['any']
+        application: ['any']
+        service: ['application-default']
+        action: 'allow'
+        
+    - name: Create Virtual Router
+      paloaltonetworks.panos.panos_virtual_router:
+        provider: '{{ device }}'
+        name: 'vr-1'
+        
+    - name: ensure mngt profile trust exists 
+      paloaltonetworks.panos.panos_management_profile:
+        provider: '{{ device }}'
+        name: 'trust'
+        ping: true
+        ssh: true 
+        https: true
+        
+    - name: ensure mngt profile untrust exists 
+      paloaltonetworks.panos.panos_management_profile:
+        provider: '{{ device }}'
+        name: 'untrust'
+        ping: true    
+
+    - name: create trust zone on a firewall
+      paloaltonetworks.panos.panos_zone:
+        provider: '{{ device }}'
+        zone: 'trust2'
+        mode: 'layer3'
+        
+    - name: create untrust zone on a firewall
+      paloaltonetworks.panos.panos_zone:
+        provider: '{{ device }}'
+        zone: 'untrust2'
+        mode: 'layer3'
+        
+    - name: create VPN zone on a firewall
+      paloaltonetworks.panos.panos_zone:
+        provider: '{{ device }}'
+        zone: 'VPN'
+        mode: 'layer3'
+    
+        
+    - name: Create ethernet interfaces
+      paloaltonetworks.panos.panos_interface:
+        provider: '{{ device }}'
+        if_name: 'ethernet1/2'
+        mode: 'layer3'
+        zone_name: 'untrust'
+        vr_name: 'vr-1'
+        ip: ['20.20.2.2/24']
+        enable_dhcp: false
+        management_profile: 'untrust'
+      register: result
+
+    - name: create tunnel.100
+      paloaltonetworks.panos.panos_tunnel:
+        provider: '{{ device }}'
+        if_name: "tunnel.100"
+        zone_name: 'VPN'
+        vr_name: 'vr-1'
+        management_profile: 'untrust'
+
+    - name: ensure mngt profile trust exists 
+      paloaltonetworks.panos.panos_management_profile:
+        provider: '{{ device }}'
+        name: 'trust'
+        ping: true
+        ssh: true 
+        https: true
+        
+    - name: ensure mngt profile untrust exists 
+      paloaltonetworks.panos.panos_management_profile:
+        provider: '{{ device }}'
+        name: 'untrust'
+        ping: true
+
+
+    - name: ethernet1/1.10 as static 
+      paloaltonetworks.panos.panos_l3_subinterface:
+        provider: '{{ device }}'
+        name: "ethernet1/1.10"
+        tag: 10
+        enable_dhcp: false
+        ip: ["192.168.10.1/24"]
+        zone_name: "trust"
+        vr_name: 'vr-1'
+        management_profile: 'trust'
+
+    - name: ethernet1/1.20 as static
+      paloaltonetworks.panos.panos_l3_subinterface:
+        provider: '{{ device }}'
+        name: "ethernet1/1.20"
+        tag: 20
+        enable_dhcp: false
+        ip: ["192.168.20.1/24"]
+        zone_name: "untrust"
+        vr_name: 'vr-1'
+        management_profile: 'untrust'
+
+    - name: Create route 
+      paloaltonetworks.panos.panos_static_route:
+        provider: '{{ device }}'
+        name: 'Test-One'
+        destination: '0.0.0.0/0'
+        nexthop: '20.20.2.1'
+        metric: "10"
+        
+
+    - name: Create route 'vpn'
+      paloaltonetworks.panos.panos_static_route:
+        provider: '{{ device }}'
+        name: 'ROUTE VPN'
+        destination: '192.168.0.0/16'
+        interface: 'tunnel.100'
+        nexthop_type: 'none'
+        metric: "10"
+        
+
+    - name: Add IKE crypto config to the firewall
+      paloaltonetworks.panos.panos_ike_crypto_profile:
+        provider: '{{ device }}'
+        state: 'present'
+        name: 'vpn-ike-profile'
+        dh_group: ['group2']
+        authentication: ['sha1']
+        encryption: ['aes-128-cbc']
+        lifetime_seconds: '28800'    
+
+    - name: Add IKE gateway config to the firewall
+      paloaltonetworks.panos.panos_ike_gateway:
+        provider: '{{ device }}'
+        state: 'present'
+        name: 'IKEGW-Ansible'
+        version: 'ikev1'
+        interface: 'ethernet1/2'
+        local_ip_address_type: 'ip'
+        local_ip_address: '20.20.3.2/24'
+        peer_ip_value: '20.20.2.2'
+        pre_shared_key: 'ahmed123'
+        peer_id_type: 'ipaddr'
+        peer_id_value: '20.20.2.2'
+        local_id_type: 'ipaddr'
+        local_id_value: '20.20.3.2'
+        enable_passive_mode: false
+        enable_liveness_check: false
+        liveness_check_interval: '5'
+        ikev1_exchange_mode: 'auto'
+        ikev1_crypto_profile: 'vpn-ike-profile'
+
+
+    - name: Add IPSec crypto config to the firewall
+      paloaltonetworks.panos.panos_ipsec_profile:
+        provider: '{{ device }}'
+        state: 'present'
+        name: 'ipsec-vpn-profile'
+        esp_authentication: ['sha1']
+        esp_encryption: ['aes-128-cbc']
+        lifetime_seconds: '3600'
+
+    - name: Add IPSec tunnel to IKE gateway profile
+      paloaltonetworks.panos.panos_ipsec_tunnel:
+        provider: '{{ device }}'
+        name: 'IPSecTunnel-Ansible'
+        tunnel_interface: 'tunnel.101'
+        ak_ike_gateway: 'IKEGW-Ansible'
+        ak_ipsec_crypto_profile: 'ipsec-profile'
+        state: 'present'
+
+    # - name: Configure DHCP Server
+    #   paloaltonetworks.panos.panos_dhcp_server:
+    #     provider: "{{ device }}"
+    #     name: "dhcp_server"    
+    
+
+    
+   
+
+
+
+
+    
+        
+    # - name: add ethernet1/2 to zone untrust2
+    #   paloaltonetworks.panos.panos_interface:
+    #     provider: '{{ device }}'
+    #     zone: 'untrust2'
+    #     mode: 'layer3'
+    #     interface: ['ethernet1/2']
+
+ 
