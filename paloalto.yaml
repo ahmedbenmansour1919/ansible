@@ -156,7 +156,7 @@
         interface: 'ethernet1/2'
         local_ip_address_type: 'ip'
         local_ip_address: '20.20.2.2/24'
-        peer_ip_value: '20.20.2.2'
+        peer_ip_value: '20.20.3.2'
         pre_shared_key: 'ahmed123'
         peer_id_type: 'ipaddr'
         peer_id_value: '20.20.3.2'
