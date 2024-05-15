@@ -155,13 +155,13 @@
         version: 'ikev1'
         interface: 'ethernet1/2'
         local_ip_address_type: 'ip'
-        local_ip_address: '20.20.3.2/24'
+        local_ip_address: '20.20.2.2/24'
         peer_ip_value: '20.20.2.2'
         pre_shared_key: 'ahmed123'
         peer_id_type: 'ipaddr'
-        peer_id_value: '20.20.2.2'
+        peer_id_value: '20.20.3.2'
         local_id_type: 'ipaddr'
-        local_id_value: '20.20.3.2'
+        local_id_value: '20.20.2.2'
         enable_passive_mode: false
         enable_liveness_check: false
         liveness_check_interval: '5'
@@ -182,7 +182,7 @@
       paloaltonetworks.panos.panos_ipsec_tunnel:
         provider: '{{ device }}'
         name: 'IPSecTunnel-Ansible'
-        tunnel_interface: 'tunnel.101'
+        tunnel_interface: 'tunnel.100'
         ak_ike_gateway: 'IKEGW-Ansible'
         ak_ipsec_crypto_profile: 'ipsec-profile'
         state: 'present'
