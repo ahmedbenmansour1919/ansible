@@ -39,6 +39,11 @@
           - network 0.0.0.0 255.255.255.255 area 0
       register: result_ospf
 
+    - name: save
+      ios_command:
+        commands:
+          - wr
+
     # Add more tasks as needed
 
     - name: Print task results
@@ -46,5 +51,4 @@
         var: item
       with_items:
         - result_interface_config
-        - result_SSH
         - result_ospf
