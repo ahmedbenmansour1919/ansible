@@ -51,7 +51,7 @@
     - name: create untrust zone on a firewall
       paloaltonetworks.panos.panos_zone:
         provider: '{{ device }}'
-        zone: 'untrust2'
+        zone: 'untrust'
         mode: 'layer3'
         
     - name: create VPN zone on a firewall
