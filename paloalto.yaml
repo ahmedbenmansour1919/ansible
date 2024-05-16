@@ -186,7 +186,7 @@
         name: 'IPSecTunnel-Ansible'
         tunnel_interface: 'tunnel.100'
         ak_ike_gateway: 'IKEGW-Ansible'
-        ak_ipsec_crypto_profile: 'ipsec-profile'
+        ak_ipsec_crypto_profile: 'ipsec-vpn-profile'
         state: 'present'
 
     # - name: Configure DHCP Server
