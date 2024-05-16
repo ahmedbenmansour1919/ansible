@@ -121,22 +121,23 @@
     - name: Create route 
       paloaltonetworks.panos.panos_static_route:
         provider: '{{ device }}'
+        vr_name: 'vr-1'
         name: 'route'
         destination: '0.0.0.0/0'
         nexthop: '20.20.2.1'
         metric: "10"
-        vr_name: 'vr-1'
+        
         
 
     - name: Create route 'vpn'
       paloaltonetworks.panos.panos_static_route:
         provider: '{{ device }}'
+        vr_name: 'vr-1'
         name: 'ROUTE VPN'
         destination: '192.168.0.0/16'
         interface: 'tunnel.100'
         nexthop_type: 'none'
         metric: "10"
-        vr_name: 'vr-1'
 
     - name: Add IKE crypto config to the firewall
       paloaltonetworks.panos.panos_ike_crypto_profile:
