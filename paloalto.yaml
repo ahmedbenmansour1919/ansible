@@ -114,9 +114,9 @@
         tag: 20
         enable_dhcp: false
         ip: ["192.168.20.1/24"]
-        zone_name: "untrust"
+        zone_name: "trust"
         vr_name: 'vr-1'
-        management_profile: 'untrust'
+        management_profile: 'trust'
 
     - name: Create route 
       paloaltonetworks.panos.panos_static_route:
