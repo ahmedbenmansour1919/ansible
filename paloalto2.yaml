@@ -68,7 +68,7 @@
         mode: 'layer3'
         zone_name: 'untrust'
         vr_name: 'vr-1'
-        ip: ['20.20.2.2/24']
+        ip: ['20.20.3.2/24']
         enable_dhcp: false
         management_profile: 'untrust'
       register: result
@@ -96,24 +96,24 @@
         ping: true
 
 
-    - name: ethernet1/1.10 as static 
+    - name: ethernet1/1.30 as static 
       paloaltonetworks.panos.panos_l3_subinterface:
         provider: '{{ device }}'
-        name: "ethernet1/1.10"
-        tag: 10
+        name: "ethernet1/1.30"
+        tag: 30
         enable_dhcp: false
-        ip: ["192.168.10.1/24"]
+        ip: ["192.168.30.1/24"]
         zone_name: "trust"
         vr_name: 'vr-1'
         management_profile: 'trust'
 
-    - name: ethernet1/1.20 as static
+    - name: ethernet1/1.40 as static
       paloaltonetworks.panos.panos_l3_subinterface:
         provider: '{{ device }}'
-        name: "ethernet1/1.20"
-        tag: 20
+        name: "ethernet1/1.40"
+        tag: 40
         enable_dhcp: false
-        ip: ["192.168.20.1/24"]
+        ip: ["192.168.40.1/24"]
         zone_name: "untrust"
         vr_name: 'vr-1'
         management_profile: 'untrust'
@@ -122,9 +122,9 @@
       paloaltonetworks.panos.panos_static_route:
         provider: '{{ device }}'
         virtual_router: 'vr-1'
-        name: 'Test-One'
+        name: 'route'
         destination: '0.0.0.0/0'
-        nexthop: '20.20.2.1'
+        nexthop: '20.20.3.1'
         metric: "10"
         
 
@@ -184,7 +184,7 @@
       paloaltonetworks.panos.panos_ipsec_tunnel:
         provider: '{{ device }}'
         name: 'IPSecTunnel-Ansible'
-        tunnel_interface: 'tunnel.101'
+        tunnel_interface: 'tunnel.100'
         ak_ike_gateway: 'IKEGW-Ansible'
         ak_ipsec_crypto_profile: 'ipsec-vpn-profile'
         state: 'present'
