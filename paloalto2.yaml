@@ -121,6 +121,7 @@
     - name: Create route 
       paloaltonetworks.panos.panos_static_route:
         provider: '{{ device }}'
+        virtual_router: 'vr-1'
         name: 'Test-One'
         destination: '0.0.0.0/0'
         nexthop: '20.20.2.1'
@@ -130,6 +131,7 @@
     - name: Create route 'vpn'
       paloaltonetworks.panos.panos_static_route:
         provider: '{{ device }}'
+        virtual_router: 'vr-1'
         name: 'ROUTE VPN'
         destination: '192.168.0.0/16'
         interface: 'tunnel.100'
