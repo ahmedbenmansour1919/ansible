@@ -34,5 +34,10 @@
           - switchport mode access
       register: create_vlans
 
+    - name: save
+      ios_command:
+        commands:
+          - wr
+
     - name: Debug registered var
       debug: var=sh_vlan_br_result.stdout_lines
