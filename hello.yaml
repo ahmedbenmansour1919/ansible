@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: no
   connection: network_cli 
-  tasks:
+  tasks: 
     - name: Configure interface FastEthernet
       ios_command:
         commands:
