@@ -2,7 +2,7 @@
 - name: Configure network devices 
   hosts: all
   gather_facts: no
-  connection: network_cli
+  connection: network_cli 
   tasks:
     - name: Configure interface FastEthernet
       ios_command:
